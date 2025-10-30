@@ -1,6 +1,6 @@
 console.log("script.js loaded");
 
-
+// declaring images as array
 let images = [];
 // building a function to get GIF information
 // adding parameter so that the endpoint can be changed according to the user's input
@@ -19,7 +19,7 @@ async function getGIF(search) {
     // .map() function iterate every GIF and the URL will be stored into the images array
     images = converted.data.map(gif => gif.images.original.url);
     // cheking if images is the array with unique URLs
-    console.log(images)
+    console.log(images);
 }
 
 
@@ -31,8 +31,11 @@ const GIFContainer = document.querySelector("#gif-container");
 const button = document.querySelector("#fetch-gif-btn");
 
 // activating a the button when it is clicked
-// making sure that the function is async by putting "async" 
+// making sure that the function is async by putting "async" infront of function 
 button.addEventListener("click", async function(){
+  // the following line is for cleaning the search result each time 
+  // without this all the images from earlier searches remained on the screen, so I had to solve it.
+  GIFContainer.innerHTML = "";
   // getting the value the user entered once the button is clicked
   const search = sInput.value;
   // the following function has to be called after we have an input from the user(this was called right after the function defined earlier)
