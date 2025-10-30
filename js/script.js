@@ -31,7 +31,7 @@ async function getGIF(search) {
 // creating the variable that will be used to get an input
 const sInput = document.querySelector("#search-input");
 // creating a container to store all the GIF
-const GIFContainer = document.querySelector("#gif-container");
+const gifContainer = document.querySelector("#gif-container");
 // selecting the button that user can push
 const button = document.querySelector("#fetch-gif-btn");
 
@@ -43,7 +43,7 @@ button.addEventListener("click", async function(){
      the following line is for cleaning the search result each time 
      without this all the images from earlier searches remained on the screen, so I introduced this line to solve that. 
   */
-  GIFContainer.innerHTML = "";
+  gifContainer.innerHTML = "";
   // getting the value the user entered once the button is clicked
   const search = sInput.value;
   /* 
@@ -56,7 +56,7 @@ button.addEventListener("click", async function(){
   // loop through the elements of images
   for (let i =0; i< images.length; i++) {
     // adding images into the GIF container
-    GIFContainer.innerHTML += `<img src="${images[i]}" class="col-3 mb-3">`;
+    gifContainer.innerHTML += `<img src="${images[i]}" class="col-3 mb-3">`;
   }
 });
 
