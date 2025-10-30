@@ -16,11 +16,28 @@ async function getGIF() {
     // converted -> data -> images -> original -> url
     // .map() function iterate every GIF and the URL will be stored into the images array
     images = converted.data.map(gif => gif.images.original.url);
-    // cheking if imge is the array with unique URLs
+    // cheking if images is the array with unique URLs
     console.log(images)
-
 }
 getGIF()
+
+
+   
+// creating a container to store all the GIF
+const GIFContainer = document.querySelector("#gif-container");
+// selecting the button that usercan push
+const button = document.querySelector("#fetch-gif-btn");
+
+// activating a the button when it is clicked
+// making sure that the function is async
+button.addEventListener("click", async function (){
+  // loop through the element of images
+  for (let i =0; i< images.length; i++) {
+    // adding images into the GIF container
+    GIFContainer.innerHTML += `<img src="${images[i]}" class="col-3 mb-3">`;
+  }
+});
+
 
  
 
