@@ -1,10 +1,12 @@
 console.log("script.js loaded");
 
-const endpoint = "https://api.giphy.com/v1/gifs/search?api_key=V83DiBIHOu3SR4NMOo2N38wCXAiebbTH&q=dogs&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips"
 
 let images = [];
 // building a function to get GIF information
-async function getGIF() {
+// adding parameter so that the endpoint can be changed according to the user's input
+async function getGIF(search) {
+    // adapting the API key to the user input by using string interpolation
+    const endpoint = `https://api.giphy.com/v1/gifs/search?api_key=V83DiBIHOu3SR4NMOo2N38wCXAiebbTH&q=${search}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
     // requesting data
     const response = await fetch(endpoint);
     // converting data to json
@@ -19,18 +21,25 @@ async function getGIF() {
     // cheking if images is the array with unique URLs
     console.log(images)
 }
-getGIF()
 
 
-   
+// creating the variable that will be used to get an input
+const sInput = document.querySelector("#search-input");
 // creating a container to store all the GIF
 const GIFContainer = document.querySelector("#gif-container");
-// selecting the button that usercan push
+// selecting the button that user can push
 const button = document.querySelector("#fetch-gif-btn");
 
 // activating a the button when it is clicked
-// making sure that the function is async
-button.addEventListener("click", async function (){
+// making sure that the function is async by putting "async" 
+button.addEventListener("click", async function(){
+  // getting the value the user entered once the button is clicked
+  const search = sInput.value;
+  // the following function has to be called after we have an input from the user(this was called right after the function defined earlier)
+  // otherwise, we do not know what to search for
+  // Using "await" is a key, other wise the code will not wait untile the loading is finished
+  // without "await", I kept getting no GIF on the website
+  await getGIF(search);
   // loop through the element of images
   for (let i =0; i< images.length; i++) {
     // adding images into the GIF container
@@ -39,6 +48,5 @@ button.addEventListener("click", async function (){
 });
 
 
- 
 
 
